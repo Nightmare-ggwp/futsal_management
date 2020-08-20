@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+<a href="create" class="btn btn-primary">Create Grounds</a>
+<form method="post" action="search">
+    {% csrf_token %}
+    <input type="text" name="search"/>
+</form>
+<table class="table table-primary">
+    <tr>
+        <th>ID</th>
+        <th>Ground Name</th>
+        <th>Price</th>
+        <th>Player Capacity</th>
+        <th>Image</th>
+    </tr>
+    {% for data in grounds %}
+    <tr>
+        <td>{{data.ground_id}}</td>
+        <td>{{data.ground_name}}</td>
+        <td>{{data.price}}</td>
+        <td>{{data.player_capacity}}</td>
+        <td>{{data.description}}</td>
+        {% load static %}
+        <td><img width="100" src="/{{data.image}}"</td>
+        <th>
+            <a href="update/{{data.ground_id}}" class="btn btn-primary">edit</a>
+            |
+            <a href="delete/{{data.ground_id}}" class="btn btn-success">delete</a>
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+<form method="POST" action="">
+    {% csrf_token %}
+    {% if page > 1 %}
+    <button name="prev">prev</button>
+    {% endif %}
+    <input style="width: 50px" value="{{page}}" name="page"/>
+
+    {% if pageItem == 4 %}
+    <button name="next">next</button>
+    {% endif %}
+</form
+        <!--to active selected tab in sidebar-->
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#ground').addClass('active');
+    });
+</script>
+{% endblock %}

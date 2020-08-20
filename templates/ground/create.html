@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form method="POST" action="create" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Grorund Name</label>
+    {{form.ground_name}}
+
+    <label>Price</label>
+    {{form.price}}
+
+    <label>Player Capacity</label>
+    {{form.player_capacity}}
+
+    <label>image</label>
+    {{form.image}}
+
+
+    <input type="submit" value="submit"/>
+</form>
+<!--to active selected tab in sidebar-->
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#ground').addClass('active');
+    });
+</script>
+{% endblock %}

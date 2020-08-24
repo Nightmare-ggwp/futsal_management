@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Customer</label>
+    {{form.customer}}
+
+    <label>Item Name</label>
+    {{form.Item_name}}
+
+    <label>Price</label>
+    {{form.price}}
+
+    <label>Description</label>
+    {{form.description}}
+
+    <label>image</label>
+    {{form.image}}
+
+    <input type="submit" value="submit"/>
+</form>
+<!--to active selected tab in sidebar-->
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar').find('.active').removeClass('active');
+        $('#cafe').addClass('active');
+    });
+</script>
+{% endblock %}

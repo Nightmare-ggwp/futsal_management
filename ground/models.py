@@ -6,7 +6,7 @@ class Ground(models.Model):
    ground_name = models.CharField(max_length=30,default="")
    price = models.CharField(max_length=10,default="")
    player_capacity = models.CharField(max_length=10,default="")
-   image = models.FileField(upload_to="ground/")
+   image = models.FileField(upload_to="images/ground/")
 
    class Meta:
        db_table = "ground"

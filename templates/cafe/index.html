@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-{% load static %}
-<a href="create" class="btn btn-primary">Create Grounds</a>
+<a href="create" class="btn btn-primary">Create Cafe</a>
 <form method="post" action="search">
     {% csrf_token %}
     <input type="text" name="search"/>
@@ -9,26 +8,25 @@
 <table class="table table-primary">
     <tr>
         <th>ID</th>
-        <th>Ground Name</th>
+        <th>Item Name</th>
+        <th>Customer Name</th>
         <th>Price</th>
-        <th>Player Capacity</th>
+        <th>Description</th>
         <th>Image</th>
     </tr>
-    {% for data in grounds %}
+    {% for data in cafe %}
     <tr>
-        <td>{{data.ground_id}}</td>
-        <td>{{data.ground_name}}</td>
+        <td>{{data.cafe_id}}</td>
+        <td>{{data.item_name}}</td>
+        <td>{{data.customer.name}}</td>
         <td>{{data.price}}</td>
-        <td>{{data.player_capacity}}</td>
         <td>{{data.description}}</td>
-        <td>
-            <img width="100" src="/static/{{data.image}}">
-<!--        <img src="{% static '{{data.image}}' %}" alt="My image">-->
-</td>
+        {% load static %}
+        <td><img width="100" src="/static/{{data.image}}"</td>
         <th>
-            <a href="update/{{data.ground_id}}" class="btn btn-primary">edit</a>
+            <a href="update/{{data.cafe_id}}" class="btn btn-primary">edit</a>
             |
-            <a href="delete/{{data.ground_id}}" class="btn btn-success">delete</a>
+            <a href="delete/{{data.cafe_id}}" class="btn btn-success">delete</a>
         </th>
     </tr>
     {% endfor %}
@@ -48,7 +46,7 @@
 <script type="text/javascript">
     $(function () {
         $('.sidebar').find('.active').removeClass('active');
-        $('#ground').addClass('active');
+        $('#cafe').addClass('active');
     });
 </script>
 {% endblock %}

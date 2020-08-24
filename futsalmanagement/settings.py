@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'ground',
     'home',
     'book',
-    'django_inlinecss'
+    'django_inlinecss',
+    'cafe'
 ]
 
 MIDDLEWARE = [
@@ -128,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
+
 
 STATICFILES_DIRS=[os.path.join('static')]
 MEDIA_ROOT = os.path.join(BASE_DIR,'static')

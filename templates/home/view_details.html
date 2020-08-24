@@ -1,52 +1,66 @@
 {% extends 'home/home-layout.html' %}
 {% block home-content %}
+{% load static %}
+<div class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <div class="booking-bg"><img width="100" src="/static/{{data.image}}"></div>
+                    <form method="POST" action="/book/create">
+                        <div class="form-header">
+                            <h2>Book your Futsal ground now</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Booking date:</span>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Booking time:</span>
+                                    <input type="time" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <span class="form-label">Username:</span>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <span class="form-label">Ground Name</span>
+                                {{form.ground_name}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <span class="form-label">Price</span>
+                                {{form.price}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <span class="form-label">Player Capacity</span>
+                                {{form.player_capacity}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
 
-<div class="row no-gutters">
-    fghjkl
-	{% for data in grounds %}
-	<div class="col-lg-6">
-		<div class="room-wrap d-md-flex ftco-animate">
-			<a href="#" class="img" style="background-image:url(/{{data.image}});"></a>
-			<div class="half left-arrow d-flex align-items-center">
-				<div class="text p-4 text-center">
-					<p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-					<p class="mb-0"><span class="price mr-1">Rs.{{data.price}}</span><span class="per">per hour</span></p>
-					<h3 class="mb-3"><a href="#">{{data.ground_name}}</a></h3>
-					<p class="pt-1"><a href="/view_details" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% endfor %}
-</div>
-
-
-
-<div class="container-fluid">
-    <div>
-        {% for data in grounds %}
-        <div class="col-lg-4">
-<!--            {% load static %}-->
-<!--            <img width="100" src="/{{data.image}}"/>-->
-            {% if request.session.customer_id %}
-            <h1>{{data.ground_name}}</h1>
-            <p>booking ground id: {{data.ground_id}}</p>
-            <p>booking price: {{data.price}}</p>
-            <p>ground player capacity: {{data.player_capacity}}</p>
-            <form method="POST" action="/book/create">
-                {% csrf_token %}
-                <input readonly type="text" name="ground" value="{{data.ground_id}}"/>
-                <input readonly type="text" name="customer" value="{{request.session.customer_id}}"/>
-                <p><input type="time" name="time"/></p>
-                <p><input type="date" name="date"/></p>
-                <button type="submit" class="btn btn-outline-primary">book</button>
-            </form>
-<!---->
-            {% else %}
-            <p class="text-info">please register</p>
-            {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary">Book Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-<!--        {% endfor %}-->
     </div>
 </div>
 {% endblock %}

@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
+<a href="create" class="btn btn-primary">Create Book</a>
+<form method="post" action="search">
+    {% csrf_token %}
+    <input type="text" name="search"/>
+</form>
 <table class="table table-primary">
     <tr>
         <th>ID</th>
@@ -10,18 +14,18 @@
         <th>date</th>
         <th>time</th>
     </tr>
-    {% for data in books %}
+    {% for data in book %}
     <tr>
         <td>{{data.book_id}}</td>
         <td>Name: {{data.customer.name}}<br/>
             Username: {{data.customer.username}}<br/>
-            Contact: {{data.customer.contact}}
+            Contact: {{data.customer.contact}}<br>
         </td>
         {% load static %}
-        <td><img width="100" src="/{{data.ground.image}}"/>
-            Ground Name: {{data.ground.ground_name}}
-            Price: {{data.ground.price}}
-            Player Capacity: {{data.ground.player_capacity}}
+        <td><img width="100" src="/static/{{data.ground.image}}"/><br>
+            Ground Name: {{data.ground.ground_name}}<br>
+            Price: {{data.ground.price}}<br>
+            Player Capacity: {{data.ground.player_capacity}}<br>
         </td>
         <td>{{data.date}}</td>
         <td>{{data.time}}</td>

@@ -3,4 +3,5 @@ from book import views
 urlpatterns = [
     path('',views.index),
     path('create',views.create),
+    path('search',views.search),
 ]

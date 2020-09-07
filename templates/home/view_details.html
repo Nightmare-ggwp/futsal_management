@@ -5,53 +5,45 @@
     <div class="section-center">
         <div class="container">
             <div class="row">
+                {% if request.session.customer_id %}
                 <div class="booking-form">
-                    <div class="booking-bg"><img width="100" src="/static/{{data.image}}"></div>
+                    {% load static %}
+                    <div class="booking-bg" style="background-image:url(/static/{{ground.image}});"></div>
                     <form method="POST" action="/book/create">
-                        <div class="form-header">
-                            <h2>Book your Futsal ground now</h2>
-                        </div>
+                        {% csrf_token %}
+                        <label class="form-group"><h2>Book your Futsal ground now</h2></label>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <span class="form-label">Booking date:</span>
-                                    <input type="date" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <span class="form-label">Booking time:</span>
-                                    <input type="time" class="form-control" required>
+                                    <label >Booking date</label>
+                                    <input class="form-control" type="text" value="{{form.date}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group">
-                                <span class="form-label">Username:</span>
-                                <input type="text" class="form-control" required>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Booking time</label>
+                                    <input class="form-control" type="text" value="{{form.time}}">
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <span class="form-label">Ground Name</span>
-                                {{form.ground_name}}
+                                <label class="form-label">Ground Name</label><br>
+                                <input readonly class="form-control" type="text" value="{{ground.ground_name}}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <span class="form-label">Price</span>
-                                {{form.price}}
+                                <label class="form-label">Price</label><br>
+                                <input readonly class="form-control" type="text" value="{{ground.price}}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <span class="form-label">Player Capacity</span>
-                                {{form.player_capacity}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-
+                                <label class="form-label">Player Capacity</label><br>
+                                <input readonly class="form-control" type="text" value="{{ground.player_capacity}}">
                             </div>
                         </div>
                         <div class="row">
@@ -59,6 +51,9 @@
                         </div>
                     </form>
                 </div>
+                {% else %}
+                <div><h2>Please Register</h2></div>
+                {% endif %}
             </div>
         </div>
     </div>

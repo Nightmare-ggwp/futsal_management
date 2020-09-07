@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from ground.models import Ground
+from customer.models import Customer
 from customer.forms import CustomerForm
 from ground.forms import GroundForm
 # Create your views here.
@@ -27,27 +28,17 @@ def login(request):
 
     return render(request,"home/login.html")
 
-def login_customer(request):
-
-    if(request.method=='POST'):
-       request.session['username']=request.POST['username']
-       request.session['password']=request.POST['password']
-       print('CUSTOMER')
-
-       return redirect("/")
-    return render(request,"home/login_customer.html")
-
-
 def logout(request):
     request.session.clear()
     return redirect("/")
 
 def view_details(request,id):
-    ground=Ground.objects.get(ground_id=id)
-    if request.method=="POST":
-        form=GroundForm(request.POST,request.FILES,instance=ground)
+    ground = Ground.objects.get(ground_id=id)
+    if request.method == "POST":
+        form = GroundForm(request.POST, request.FILES, instance=ground)
         form.save()
         return redirect("/view_details")
     else:
-        form=GroundForm(instance=ground)
-    return render(request,"home/view_details.html",{'form':form})
+        form = GroundForm(instance=ground)
+    return render(request, "home/view_details.html", {'ground': ground, 'form': form})
+

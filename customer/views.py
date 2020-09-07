@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from customer.models import Customer
 from customer.forms import CustomerForm
-from authenticate_customer import Authentication
+from authenticate import Authentication
 # Create your views here.
-#@Authentication.valid_customer
+@Authentication.valid_user
 def index(request):
     if(request.method=="POST"):
         page=int(request.POST['page'])
@@ -26,7 +26,7 @@ def index(request):
     pageItem=len(customers)
     return render(request,"customer/index.html",{'customers':customers,'page':page,'pageItem':pageItem})
 
-#@Authentication.valid_customer
+@Authentication.valid_user
 def create(request):
     print(request.POST)
     if request.method=="POST":
@@ -37,7 +37,13 @@ def create(request):
         form=CustomerForm()
     return render(request,"customer/create.html",{'form':form})
 
-#@Authentication.valid_customer_where_id
+@Authentication.valid_user
+def search(request):
+    print(request.POST['search'])
+    customer=Customer.objects.get(email=request.POST['search'])
+    return render(request,"user/search.html",{'customer':customer})
+
+@Authentication.valid_user_where_id
 def update(request,id):
     customer=Customer.objects.get(customer_id=id)
     if request.method=="POST":
@@ -48,7 +54,7 @@ def update(request,id):
         form=CustomerForm(instance=customer)
     return render(request,"customer/edit.html",{'form':form})
 
-#@Authentication.valid_customer_where_id
+@Authentication.valid_user_where_id
 def delete(request,id):
     customer=Customer.objects.get(customer_id=id)
     customer.delete()

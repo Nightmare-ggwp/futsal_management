@@ -2,29 +2,27 @@
 {% block content %}
 <form method="POST" action="create" enctype="multipart/form-data">
     {% csrf_token %}
-    <label>Customer ID</label>
+    <label>Book ID</label>
+    {{form.book_id}}
+
+    <label>Customer</label>
     {{form.customer}}
 
-    <label>Item Name</label>
-    {{form.item_name}}
+    <label>Ground</label>
+    {{form.ground}}
 
-    <label>Price</label>
-    {{form.price}}
+    <label>Time</label>
+    {{form.time}}
 
-    <label>Description</label>
-    {{form.description}}
-
-    <label>image</label>
-    {{form.image}}
-
-
+    <label>Date</label>
+    {{form.date}}
     <input type="submit" value="submit"/>
 </form>
 <!--to active selected tab in sidebar-->
 <script type="text/javascript">
     $(function () {
         $('.sidebar').find('.active').removeClass('active');
-        $('#cafe').addClass('active');
+        $('#book').addClass('active');
     });
 </script>
 {% endblock %}

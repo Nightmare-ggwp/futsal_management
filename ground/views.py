@@ -3,7 +3,7 @@ from ground.models import Ground
 from ground.forms import GroundForm
 from authenticate import Authentication
 # Create your views here.
-#@Authentication.valid_user
+@Authentication.valid_user
 def index(request):
     print(request.method)
     if(request.method=="POST"):
@@ -27,7 +27,7 @@ def index(request):
     pageItem=len(grounds)
     return render(request,"ground/index.html",{'grounds':grounds,'page':page,'pageItem':pageItem})
 
-#@Authentication.valid_user
+@Authentication.valid_user
 def create(request):
     print(request.POST)
     if request.method=="POST":
@@ -38,7 +38,7 @@ def create(request):
         form=GroundForm()
     return render(request,"ground/create.html",{'form':form})
 
-#@Authentication.valid_user_where_id
+@Authentication.valid_user_where_id
 def update(request,id):
     ground=Ground.objects.get(ground_id=id)
     if request.method=="POST":
@@ -49,7 +49,7 @@ def update(request,id):
         form=GroundForm(instance=ground)
     return render(request,"ground/edit.html",{'form':form})
 
-#@Authentication.valid_user_where_id
+@Authentication.valid_user_where_id
 def delete(request,id):
     ground=Ground.objects.get(ground_id=id)
     ground.delete()
